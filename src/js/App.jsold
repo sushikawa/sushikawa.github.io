@@ -1,0 +1,192 @@
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Footer from './components/Footer';
+import Landing from './components/Landing';
+import About from './components/About';
+import Menu from './components/Menu';
+import PageNotFound from './components/PageNotFound';
+import Contact from './components/Contact';
+import Navbar from './components/Navbar';
+import MobileNavbar from './components/MobileNavbar';
+// import $ from 'jquery';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import axios from 'axios';
+
+// import ReactAnimatedSlider from './components/landing/ReactAnimatedSlider';
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      toTop: false,
+      mainNavFixed: false,
+      menuNavFixed: false,
+      menuNavOffsetTop: 0,
+      navHeight: 0,
+      data: []
+    };
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     toTop: false,
+  //     mainNavFixed: false,
+  //     menuNavFixed: false,
+  //     menuNavOffsetTop: 0,
+  //     navHeight: 0,
+  //     data: []
+  //   };
+
+  //   this.masterRef = React.createRef();
+  // }
+
+  async componentDidMount() {
+    await this.getPosts();
+
+    window.addEventListener('scroll', this.handleScroll);
+    const navHeight = document.getElementsByClassName('main-nav');
+
+    this.setState({ navHeight: navHeight[0].clientHeight });
+  }
+
+  // async componentDidMount() {
+  //   await this.getPosts();
+
+  //   const navHeight = document.getElementsByClassName('main-nav');
+
+  //   this.setState({ navHeight: navHeight[0].clientHeight });
+  // }
+
+  handleMenuNavOffsetTop = menuNavOffsetTop => {
+    this.setState({ menuNavOffsetTop });
+  };
+
+  async getPosts() {
+    const res = await axios.get('/api/menu/menus');
+    const data = await await res.data;
+
+    this.setState({ data: await data });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    if (window.scrollY > 0) {
+      this.setState({ mainNavFixed: true });
+    } else {
+      this.setState({ mainNavFixed: false });
+    }
+    if (window.scrollY > this.state.menuNavOffsetTop - this.state.navHeight) {
+      this.setState({ fixed: true });
+    } else {
+      this.setState({ fixed: false });
+    }
+    if (window.scrollY > 400) {
+      this.setState({ toTop: true });
+    } else {
+      this.setState({ toTop: false });
+    }
+  };
+
+  // onScroll = () => {
+  //   // console.log('scrolled', this.masterRef.current.scrollTop);
+  //   // console.log(this.masterRef);
+  //   if (this.masterRef.current.scrollTop > 0) {
+  //     this.setState({ mainNavFixed: true });
+  //     if (this.masterRef.current.scrollTop > 400) {
+  //       this.setState({ toTop: true });
+  //     } else {
+  //       this.setState({ toTop: false });
+  //     }
+  //   } else {
+  //     this.setState({ mainNavFixed: false });
+  //   }
+  //   if (
+  //     this.masterRef.current.scrollTop >
+  //     this.state.menuNavOffsetTop - this.state.navHeight
+  //   ) {
+  //     this.setState({ fixed: true });
+  //   } else {
+  //     this.setState({ fixed: false });
+  //   }
+  // };
+
+  handleToTop = () => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  render() {
+    return <React.Fragment>{this.renderData()}</React.Fragment>;
+  }
+
+  renderData = () => {
+    return (
+      // <div className="master" ref={this.masterRef} onScroll={this.onScroll}>
+      <React.Fragment>
+        <Router>
+          <React.Fragment>
+            {this.renderNavbar()}
+
+            <Switch>
+              <Route exact path="/" render={() => <Landing />} />
+              <Route
+                path="/menu"
+                render={() => (
+                  <Menu
+                    fixed={this.state.fixed}
+                    data={this.state.data}
+                    onMenuTop={this.handleMenuNavOffsetTop}
+                    mainNavHeight={this.state.navHeight}
+                  />
+                )}
+              />
+              <Route path="/about" render={() => <About />} />
+              <Route path="/contact" render={() => <Contact />} />
+              <Route render={() => <PageNotFound />} />
+            </Switch>
+
+            {this.renderToTop()}
+            <Footer />
+          </React.Fragment>
+        </Router>
+      </React.Fragment>
+      // </div>
+    );
+  };
+
+  renderNavbar = () => {
+    let isMobile = false;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    if (w < h && w < 768) {
+      isMobile = true;
+    }
+    return isMobile ? (
+      <MobileNavbar
+        fixed={this.state.mainNavFixed}
+        height={this.state.navHeight}
+      />
+    ) : (
+      <Navbar fixed={this.state.mainNavFixed} height={this.state.navHeight} />
+    );
+  };
+
+  renderToTop = () => {
+    return this.state.toTop ? (
+      <button className="to-top" onClick={this.handleToTop}>
+        <i className="fa fa-chevron-up" />
+      </button>
+    ) : (
+      ''
+    );
+  };
+}
+
+export default App;
