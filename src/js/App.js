@@ -15,19 +15,6 @@ import $ from 'jquery';
 // import ReactAnimatedSlider from './components/landing/ReactAnimatedSlider';
 
 class App extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     toTop: false,
-  //     mainNavFixed: false,
-  //     menuNavFixed: false,
-  //     menuNavOffsetTop: 0,
-  //     navHeight: 0,
-  //     data: {}
-  //   };
-  //   this.handleScroll = this.handleScroll.bind(this);
-  // }
-
   constructor() {
     super();
     this.state = {
@@ -39,7 +26,7 @@ class App extends Component {
       cMenuNavOffsetTop: 0,
       navHeight: 0,
       messageSent: false,
-      menuLinkClicked: false,
+      // menuLinkClicked: false,
       data: {}
     };
 
@@ -48,18 +35,8 @@ class App extends Component {
 
     this.onScroll = this.onScroll.bind(this);
     this.handleMenuNavOffsetTop = this.handleMenuNavOffsetTop.bind(this);
-    this.handleMenuLinkClicked = this.handleMenuLinkClicked.bind(this);
+    // this.handleMenuLinkClicked = this.handleMenuLinkClicked.bind(this);
   }
-
-  // async componentDidMount() {
-  //   if (Object.getOwnPropertyNames(this.state.data).length === 0)
-  //     await this.getPosts();
-
-  //   window.addEventListener('scroll', this.handleScroll);
-  //   const navHeight = document.getElementsByClassName('main-nav');
-
-  //   this.setState({ navHeight: navHeight[0].clientHeight });
-  // }
 
   componentDidMount() {
     const navHeight = document.getElementsByClassName('main-nav');
@@ -133,9 +110,9 @@ class App extends Component {
     // master.scroll({ top: 0, behavior: 'smooth' });
     // this.masterRef.current.scroll({ top: 0, behavior: 'smooth' });
   };
-  handleMenuLinkClicked = () => {
-    this.setState({ menuLInkClicked: true });
-  };
+  // handleMenuLinkClicked = () => {
+  //   this.setState({ menuLInkClicked: true });
+  // };
 
   render() {
     // console.log('master', this.state.menuNavFixed);
@@ -167,7 +144,6 @@ class App extends Component {
                       onMenuTop={this.handleMenuNavOffsetTop}
                       mainNavHeight={this.state.navHeight}
                       menuWidth={clientWidth}
-                      menuLinkClicked={this.state.menuLInkClicked}
                     />
                   )}
                 />

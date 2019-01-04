@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+
+// import ContextTypes from '../ContextTypes';
+import ContextTypes from '../ContextTypes';
 
 class Navbar extends Component {
   constructor() {
     super();
     this.state = {
-      fixed: false
+      fixed: false,
+      linkDisabled: true
     };
+    this.routeChange = this.routeChange.bind(this);
   }
+  static contextType = ContextTypes;
+
   componentWillReceiveProps(nextProps) {
     this.setState({ fixed: nextProps.fixed });
   }
-  handleMenuLinkClicked = () => {
-    this.props.handleMenuLinkClicked(true);
+  routeChange = e => {
+    e.preventDefault();
+    if (!this.context.menuLinkDisabled) {
+      const path = '/menu/';
+      this.props.history.push(path);
+    }
   };
   render() {
     // console.log('nav rendered');
@@ -57,7 +68,7 @@ class Navbar extends Component {
             <NavLink
               to="/menu/"
               activeClassName="main-menu-active"
-              onClick={this.handleMenuLinkClicked.bind(this)}
+              onClick={this.routeChange}
             >
               MENU
             </NavLink>
@@ -78,4 +89,4 @@ class Navbar extends Component {
   };
 }
 
-export default Navbar;
+export default Object.assign(withRouter(Navbar), { contextType: undefined });

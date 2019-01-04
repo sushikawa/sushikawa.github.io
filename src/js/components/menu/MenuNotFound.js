@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import ContextTypes from '../../ContextTypes';
 
 class MenuNotFound extends Component {
+  static contextType = ContextTypes;
+  componentDidMount() {
+    this.context.menuLinkDisabled = false;
+  }
   render() {
     return (
       <React.Fragment>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 import data from './data/menus';
 
 class KawaSpecialRoll extends Component {
@@ -10,15 +10,14 @@ class KawaSpecialRoll extends Component {
     };
   }
   componentDidMount() {
-    const menuHeader = document.getElementsByClassName('menu-header');
-    const scrollTo = menuHeader[0].clientHeight - 40;
-    const isTouch = 'ontouchstart' in document.documentElement;
-
-    if (this.props.fixedMenu)
-      $('.master').animate(
-        { scrollTop: isTouch ? scrollTo - 60 : scrollTo - 50 },
-        0
-      );
+    // const menuHeader = document.getElementsByClassName('menu-header');
+    // const scrollTo = menuHeader[0].clientHeight - 40;
+    // const isTouch = 'ontouchstart' in document.documentElement;
+    // if (this.props.fixedMenu)
+    //   $('.master').animate(
+    //     { scrollTop: isTouch ? scrollTo - 60 : scrollTo - 50 },
+    //     0
+    //   );
   }
   render() {
     return (

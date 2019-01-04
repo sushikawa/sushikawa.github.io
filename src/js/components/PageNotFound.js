@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 // import Navbar from './Navbar';
 
+import ContextTypes from '../ContextTypes';
+
 class PageNotFound extends Component {
+  static contextType = ContextTypes;
+  componentDidMount() {
+    this.context.menuLinkDisabled = false;
+  }
   render() {
     return (
       <React.Fragment>

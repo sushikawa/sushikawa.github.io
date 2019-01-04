@@ -3,6 +3,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import $ from 'jquery';
 
 import MenuNotFound from './menu/MenuNotFound';
+import ContextTypes from '../ContextTypes';
 
 import Appetizer from './menu/Appetizer';
 import SoupAndSalad from './menu/SoupAndSalad';
@@ -42,21 +43,19 @@ class Menu extends Component {
     this.handleMenuNav = this.handleMenuNav.bind(this);
     this.change = this.change.bind(this);
   }
+  static contextType = ContextTypes;
 
   componentDidMount() {
     // this.setState({ fixedMenu: false });
+    this.context.menuLinkDisabled = true;
     this.handleMenuNav();
     window.addEventListener('resize', this.handleResize);
     $('.master').animate({ scrollTop: 0 }, 0);
-
     if (window.location.pathname === '/menu/' && $('.scroller')) {
-      // const moveLess = window.innerWidth < 767 ? -100 : -200;
-
       this.scrollLeft($('.scroller').find('.first-active')[0].offsetLeft);
     }
   }
 
-  setActiveAndMove = () => {};
   // getSnapshotBeforeUpdate(prevProps, prevState) {
   //   this.handleMenuNav();
   //   return true;
@@ -76,13 +75,6 @@ class Menu extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.fixed !== this.state.fixedMenu)
       this.setState({ fixedMenu: nextProps.fixed });
-    if (nextProps.menuLinkclicked) {
-      if (window.location.pathname === '/menu/' && $('.scroller')) {
-        // const moveLess = window.innerWidth < 767 ? -100 : -200;
-
-        this.scrollLeft($('.scroller').find('.first-active')[0].offsetLeft);
-      }
-    }
   }
 
   // static getDerivedStateFromProps(nextProps, prevState) {
@@ -103,12 +95,6 @@ class Menu extends Component {
       window.location.pathname === '/menu/' ||
       window.location.pathname === '/menu'
     ) {
-      // $('.scroller > li:first-child > a').addClass('first-active');
-      // $('.scroller > li > a')..addClass('first-active');
-      // $('.scroller > li').each((i, item) => {
-      //   console.log($('item').children('a')[0]);
-      // });
-
       $(".scroller > li > a[href*='/kawa-special-roll/']").addClass(
         'first-active'
       );
@@ -123,8 +109,6 @@ class Menu extends Component {
   };
 
   change = string => {
-    // if ($('.scroller > li:first-child > a').hasClass('first-active'))
-    //   $('.scroller > li:first-child > a').removeClass('first-active');
     let firstActiveLink = $(".scroller > li > a[href*='/kawa-special-roll/']");
     if (firstActiveLink.hasClass('first-active'))
       firstActiveLink.removeClass('first-active');
@@ -143,32 +127,24 @@ class Menu extends Component {
   scrollLeft = offset => {
     $('.scroller-x').animate({ scrollLeft: '+=' + offset }, 500);
   };
-  sideScroll = (element, direction, speed, distance, step) => {
-    let scrollAmount = 0;
-    let slideTimer = setInterval(function() {
-      if (direction === 'left') {
-        element.scrollLeft -= step;
-      } else {
-        element.scrollLeft += step;
-      }
-      scrollAmount += step;
-      if (scrollAmount >= distance) {
-        window.clearInterval(slideTimer);
-      }
-    }, speed);
-  };
+  // sideScroll = (element, direction, speed, distance, step) => {
+  //   let scrollAmount = 0;
+  //   let slideTimer = setInterval(function() {
+  //     if (direction === 'left') {
+  //       element.scrollLeft -= step;
+  //     } else {
+  //       element.scrollLeft += step;
+  //     }
+  //     scrollAmount += step;
+  //     if (scrollAmount >= distance) {
+  //       window.clearInterval(slideTimer);
+  //     }
+  //   }, speed);
+  // };
   render() {
-    // console.log('menu', this.state.fixedMenu);
-    // console.log('rendered menu');
-    if (window.location.pathname === '/menu/' && $('.scroller')) {
-      $(".scroller > li > a[href*='/kawa-special-roll/']").addClass(
-        'first-active'
-      );
-    }
     const { fixedMenu } = this.state;
 
     return (
-      // <React.Fragment>{this.state && this.renderAll(fixedMenu)}</React.Fragment>
       <React.Fragment>{this.state && this.renderAll(fixedMenu)}</React.Fragment>
     );
   }
@@ -176,7 +152,6 @@ class Menu extends Component {
     return (
       <React.Fragment>
         {this.renderHeader(fixedMenu)}
-        {/* {this.renderNav(fixedMenu)} */}
         {this.renderContent(fixedMenu)}
       </React.Fragment>
     );
@@ -450,16 +425,8 @@ class Menu extends Component {
 
   renderContent = fixedMenu => {
     return (
-      // <div
-      //   className={'menu-main-background ' + (fixedMenu ? 'addPaddingTop' : '')}
-      // >
       <div className={'menu-main-background '}>
         <div className="container menu-background">
-          {/* <div
-          className={
-            'container menu-background ' + (fixedMenu ? 'addMarginTop' : '')
-          }
-        > */}
           <Route
             render={({ location }) => (
               <TransitionGroup>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+
+import ContextTypes from '../ContextTypes';
 
 class MobileNavbar extends Component {
   constructor() {
@@ -10,7 +12,9 @@ class MobileNavbar extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.logoRef = React.createRef();
+    this.routeChange = this.routeChange.bind(this);
   }
+  static contextType = ContextTypes;
 
   componentWillReceiveProps(nextProps) {
     this.setState({ fixed: nextProps.fixed });
@@ -18,6 +22,15 @@ class MobileNavbar extends Component {
 
   handleClick = () => {
     this.setState({ isOpen: !this.state.isOpen });
+  };
+  routeChange = e => {
+    e.preventDefault();
+    this.setState({ isOpen: !this.state.isOpen });
+
+    if (!this.context.menuLinkDisabled) {
+      const path = '/menu/';
+      this.props.history.push(path);
+    }
   };
   handleLogoClick = () => {
     if (this.state.isOpen) this.setState({ isOpen: !this.state.isOpen });
@@ -110,7 +123,7 @@ class MobileNavbar extends Component {
           <li>
             <NavLink
               to="/menu/"
-              onClick={this.handleClick}
+              onClick={this.routeChange}
               activeClassName="active"
             >
               MENU
@@ -139,5 +152,6 @@ class MobileNavbar extends Component {
     );
   };
 }
-
-export default MobileNavbar;
+export default Object.assign(withRouter(MobileNavbar), {
+  contextType: undefined
+});

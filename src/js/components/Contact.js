@@ -8,6 +8,8 @@ import Businesshours from './contact/Businesshours';
 import Storeinfo from './contact/Storeinfo';
 import Googlemap from './contact/Googlemap';
 
+import ContextTypes from '../ContextTypes';
+
 export class Contact extends Component {
   constructor() {
     super();
@@ -28,8 +30,10 @@ export class Contact extends Component {
     this.onRecaptchaChange = this.onRecaptchaChange.bind(this);
     this.recaptchaRef = React.createRef();
   }
+  static contextType = ContextTypes;
   componentDidMount() {
     $('.master').animate({ scrollTop: 0 }, 0);
+    this.context.menuLinkDisabled = false;
   }
   schema = {
     firstname: Joi.string()
@@ -73,7 +77,12 @@ export class Contact extends Component {
     } else {
       const { firstname, lastname, email, message } = this.state.fields;
       axios
-        .post('/api/post/send', { firstname, lastname, email, message })
+        .post('https://sushikawa.ca/api/post/send', {
+          firstname,
+          lastname,
+          email,
+          message
+        })
         .then(result => this.setState({ sent: result.data }))
         .then(final => this.resetForm());
     }
