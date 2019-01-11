@@ -4,8 +4,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 
 <url>
   <loc>https://sushikawa.ca/</loc>
@@ -13,6 +11,86 @@
 </url>
 <url>
   <loc>https://sushikawa.ca/menu/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/appetizer/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/bbq-combo/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/beverage/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/sushi-boat/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/dessert/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/dinner-box/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/donburi/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/katsu-combo/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/kawa-special-roll/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/lunch-box/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/nigiri/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/noodle/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/party-tray/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/sashimi/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/sushi-rolls-cones/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/soup-and-salad/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/sushi-combo/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/tempura/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/teriyaki/</loc>
+  <lastmod>2019-01-02T03:20:28+00:00</lastmod>
+</url>
+<url>
+  <loc>https://sushikawa.ca/menu/udon/</loc>
   <lastmod>2019-01-02T03:20:28+00:00</lastmod>
 </url>
 <url>
